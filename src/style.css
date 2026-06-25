@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-light: #FAF7F2;     /* Warm Ivory/Sand base background */
+  --color-brand-dark: #1A2238;      /* Deep Slate Charcoal text */
+  --color-brand-accent: #D97756;    /* Warm Terracotta/Brick Orange */
+  --color-brand-muted: #81B29A;     /* Soothing Sage Green */
+  --color-brand-blue: #2A4465;      /* Deep Calm Blue */
+  --color-brand-peach: #F4EBE1;     /* Extra soft peach-beige for sections */
+  
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-sans: "Plus Jakarta Sans", "Arial", sans-serif;
+  --spacing-negative-space: 4rem;
+}
+
+/* Global resets & typography */
+body {
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-dark);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Visually stable font fallback using font-size-adjust */
+body, html, .font-sans {
+  font-size-adjust: from-font;
+}
+
+/* Custom interactive elements styling */
+.glassmorphism {
+  background: rgba(250, 247, 242, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-brand-blue), var(--color-brand-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom glowing visual elements */
+.glowing-orb {
+  background: radial-gradient(circle, rgba(217, 119, 86, 0.08) 0%, rgba(129, 178, 154, 0.04) 50%, rgba(250, 247, 242, 0) 70%);
+  filter: blur(40px);
+}
+
+.glowing-orb-blue {
+  background: radial-gradient(circle, rgba(42, 68, 101, 0.08) 0%, rgba(250, 247, 242, 0) 70%);
+  filter: blur(45px);
+}
+
+/* Soft grid pattern background */
+.grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(129, 178, 154, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(129, 178, 154, 0.03) 1px, transparent 1px);
+}
+
+/* Card hover animation */
+.creative-card {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.creative-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -15px rgba(42, 68, 101, 0.06), 0 0 0 1px rgba(217, 119, 86, 0.15);
+}
+
+/* Organic blobs shapes */
+.organic-border {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.organic-border-2 {
+  border-radius: 30% 70% 70% 30% / 50% 60% 40% 50%;
+}
+
+/* Native scroll reveals in supported browsers */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .scroll-reveal {
+      animation: fade-in-up auto linear forwards;
+      animation-timeline: view();
+      animation-range: entry 5% cover 30%;
+    }
+  }
+}
+
+/* Scroll reveal fallback class when JS adds it */
+.scroll-reveal-active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* Dialog container animations */
+dialog {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), display 0.4s allow-discrete;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+dialog::backdrop {
+  background: rgba(26, 34, 56, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), display 0.4s allow-discrete;
+}
+
+dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
